@@ -11,6 +11,11 @@ from viewer import ImageViewerPlt
 
 
 # Simpler version than run.py without pruning / cloning
+# num_samples=1000
+# without alpha, got something recognizable but with white ellipsis
+# with sy = sx, got something low quality with 5*30 it
+# with sy = sx and r = 0., got something low quality with 11*30 it
+# with r = 0, got something low quality with 9*10
 
 class GS2D:
     def __init__(self, img_size=(256, 256, 3), num_samples=1000, device="cuda"):
@@ -90,6 +95,27 @@ def main():
     gs = GS2D(img_size=(h,w,3), device=device)
     gs.train(img)
 
+def main_demo():
+    device = 'cuda'
+    gs = GS2D(img_size=(256, 256, 3), device=device)
+    # Create parameters for 3 splats
+    w = torch.tensor([
+        # sx,  sy, rho, m_x, m_y, c_r, c_g, c_b,   a
+        [-3., -3., 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],  # Red circle
+        [-1., -3., .0, -1., -1., 0.0, 1.0, 0.0, 1.0],  # Green ellipse
+        [-3., -3., .75, 1., 1., 0.0, 0.0, 1.0, 1.0],  # Blue tilted ellipse
+    ], device=device)
+
+    # Parse parameters
+    sigma, rho, mean, color, alpha = gs.parse_param(w)
+
+    # Draw the Gaussians
+    img = gs.draw_gaussian(sigma, rho, mean, color, alpha)
+
+    # Save and display the image
+    # torchvision.utils.save_image(img, "demo_splats.png")
+    gs.viewer.show_training_progress(img, img, 0, True)  # Using the same image for both predicted and target
 
 if __name__ == "__main__":
     main()
+    # main_demo()
