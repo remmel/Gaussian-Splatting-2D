@@ -1,5 +1,6 @@
 import os
 import shutil
+import time
 
 import torch
 import torch.nn as nn
@@ -66,6 +67,7 @@ class GS2D:
         optimizer = torch.optim.Adam([w], lr=lr)
 
         for epoch in range(num_epochs):
+            start_time = time.time()
             for _ in tqdm(range(30), desc=f"Epoch {epoch}"):
                 optimizer.zero_grad()
                 predicted = self.draw_gaussian(*self.parse_param(w))
@@ -73,6 +75,7 @@ class GS2D:
                 loss.backward()
                 optimizer.step()
 
+            print(f"Epoch {epoch} - {time.time() - start_time:.6f} s")
             torchvision.utils.save_image(torch.stack([predicted, target]), f"images/epoch_{epoch}.jpg")
             if self.viewer.show_training_progress(predicted, target, epoch):
                 print("Training stopped by user.")

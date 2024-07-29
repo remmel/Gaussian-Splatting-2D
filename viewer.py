@@ -44,7 +44,7 @@ class ImageViewerPlt:
     def tensor_to_numpy(self, tensor):
         return tensor.permute(1, 2, 0).cpu().detach().numpy()
 
-    def show_training_progress(self, predicted, target, epoch):
+    def show_training_progress(self, predicted, target, epoch, wait=False):
         predicted_np = self.tensor_to_numpy(predicted)
         target_np = self.tensor_to_numpy(target)
 
@@ -63,7 +63,10 @@ class ImageViewerPlt:
         self.fig.suptitle(f'Epoch {epoch}')
         self.fig.canvas.draw()
         self.fig.canvas.flush_events()
-        plt.waitforbuttonpress(timeout=0.1)
+        if wait:
+            plt.waitforbuttonpress()
+        else:
+            plt.waitforbuttonpress(timeout=0.1)
 
         return self.closed
 

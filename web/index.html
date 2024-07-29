@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaussian Splat Renderer with TensorFlow.js</title>
+    <script type="importmap">
+        {
+          "imports": {
+            "tensorflow": "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.20.0/dist/tf.fesm.js",
+            "lit": "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js"
+          }
+        }
+    </script>
+
+    <script type="module" src="main.js"> </script>
+
+    <style>
+        canvas {
+            border: 1px solid black;
+            margin: 10px;
+        }
+
+        .container {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<h2>Train</h2>
+<div>
+    <canvas id="sourceCanvas" width="256" height="256"></canvas>
+    <canvas id="targetCanvas" width="256" height="256"></canvas>
+</div>
+<button id="startButton">Start Training</button>
+
+<h2>Play with splat</h2>
+<div class="container">
+    <canvas id="demoCanvas" width="256" height="256"></canvas>
+    <div class="demo-params">
+        <range-input label="Sigma x" id="sx" min="0" max="1" step="0.01" value="0.5"></range-input>
+        <range-input label="Sigma y" id="sy" type="range" min="0" max="1" step="0.01" value="0.5"></range-input>
+        <range-input label="Rho" id="rho" type="range" min="0" max="1" step="0.01" value="0.5"></range-input>
+        <range-input label="Mean X" id="mx" type="range" min="-1" max="1" step="0.01" value="0"></range-input>
+        <range-input label="Mean Y" id="my" type="range" min="-1" max="1" step="0.01" value="0"></range-input>
+
+        <div>
+            <label for="color">Color:</label>
+            <input type="color" id="color" value="#FF0000">
+        </div>
+
+        <range-input label="Alpha" id="alpha" type="range" min="0" max="1" step="0.01" value="1"></range-input>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
