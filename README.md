@@ -1,3 +1,16 @@
+# Fork Gaussian Splatting 2D
+
+The original repository shows in simple Pytorch code how to reproduce an image using 2D splats instead of pixels; and also integrate a splat prune/cloning strategy
+I've added:
+- python viewer
+- web playground to understand how the parameters influence the splat
+- web training using tensorflow.js
+
+[web](https://remmel.github.io/Gaussian-Splatting-2D/web)
+
+
+
+# Original Readme:
 # Gaussian Splatting 2D
 This is a demo of 2d gaussian generating image.
 ## Features
