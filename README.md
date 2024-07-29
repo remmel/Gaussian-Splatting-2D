@@ -8,6 +8,10 @@ I've added:
 
 [web](https://remmel.github.io/Gaussian-Splatting-2D/web)
 
+The below reproduction lasts ~100s using 100 splats with 10x30 iterations. 100 splats is few, but to avoid waiting forever as tfjs uses webgl (and indirectly the GPU - here indirectly my iGPU instead of directly my GPU)
+[more info](web/README.md).
+
+![result-web.png](result-web.png)
 
 
 # Original Readme:
