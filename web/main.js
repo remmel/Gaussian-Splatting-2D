@@ -20,6 +20,7 @@ async function initTrain() {
     ctx.drawImage(img, 0, 0, 256, 256);
 
     async function startTrain() {
+        this.disabled = true;
         const targetImageData = ctx.getImageData(0, 0, 256, 256);
         const targetTensor = tf.browser.fromPixels(targetImageData).div(255);
         const gs = new GS2D();

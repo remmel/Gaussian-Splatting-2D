@@ -13,6 +13,15 @@ The below reproduction lasts ~100s using 100 splats with 10x30 iterations. 100 s
 
 ![result-web.png](result-web.png)
 
+# Contribute
+
+## Web
+web$ `npx serve`
+
+## Python
+pip install ipywidgets matplotlib
+
+
 
 # Original Readme:
 # Gaussian Splatting 2D
